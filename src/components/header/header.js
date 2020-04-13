@@ -2,10 +2,9 @@ import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import {NavLink} from 'react-router-dom';
+
+import './header.scss';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 	menuButton: {
 		marginRight: theme.spacing(2),
 	},
-	title: {
+	mainMenu: {
 		flexGrow: 1,
 	},
 }));
@@ -27,12 +26,33 @@ const Header = (props) => {
 		<div className={classes.root}>
 			<AppBar position="static">
 				<Toolbar>
-					<Typography variant="h6" className={classes.title}>
-						<Button color="inherit">Posts</Button>
-						<Button color="inherit">About</Button>
-					</Typography>
+					<div className={classes.mainMenu} >
+						<ul className="navigation">
+							<li>
+								<NavLink to="/">Posts</NavLink>
+							</li>
+							<li>
+								<NavLink to="/about">About</NavLink>
+							</li>
+						</ul>
+					</div>
 
-					<Button color="inherit">Login</Button>
+					<ul className="navigation">
+						<li>
+							<NavLink to="/new-post">Create new post</NavLink>
+						</li>
+						<li>
+							<NavLink to="/login">Login</NavLink>
+						</li>
+						<li>
+							<button
+								onClick={props.logOutHandler}
+							>
+								Log out
+							</button>
+						</li>
+					</ul>
+
 				</Toolbar>
 			</AppBar>
 		</div>
