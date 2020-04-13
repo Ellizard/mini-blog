@@ -7,19 +7,13 @@
 
   &:hover {
     box-shadow: 0 1px 17px 0 rgba(0,0,0,0.15);
-    .adminAction {
-      opacity: 1;
-    }
   }
 
   .teasericon {
     text-align: center;
   }
 
-  .adminAction {
-    position: absolute;
-    right: 0;
-    top: 0;
+  .adminLinks {
     opacity: 0;
   }
 
