@@ -1,10 +1,23 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
+import PostList from './components/postList/postList';
+import Header from './components/header/header';
+
+
 
 function App() {
+
+
   return (
-    <div className="App">
-      <h1>Blog</h1>
-    </div>
+
+      <Container>
+		  <Header />
+          <PostList />
+      </Container>
+
+
+
+
   );
 }
 
