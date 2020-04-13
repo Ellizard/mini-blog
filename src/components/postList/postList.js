@@ -5,35 +5,17 @@ import classes from './postList.module.scss';
 
 const postList = (props) => {
 	return (
-		<div>
+		<div className={classes.postList}>
 			<Grid container spacing={1}>
-				<Grid item xs={12}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
-				<Grid item xs={12} sm={6} md={3}>
-					<PostTeaser />
-				</Grid>
+				{props.posts.map( (post) => {
+					return (
+						<Grid key={post.id} item xs={12} sm={6} md={3}>
+							<PostTeaser
+								post={post}
+							/>
+						</Grid>
+					)
+				})}
 			</Grid>
 		</div>
 	);
