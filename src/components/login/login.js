@@ -1,4 +1,5 @@
 import React, {useState}  from "react";
+import {withRouter} from 'react-router-dom';
 import {Button} from "@material-ui/core";
 import './login.scss';
 
@@ -6,8 +7,6 @@ const Login = (props) => {
 
 	const [name, setName] = useState('');
 	const [pass, setPass] = useState('');
-
-	//console.log(name, pass);
 
 	return (
 		<div className="login">
@@ -32,4 +31,4 @@ const Login = (props) => {
 	);
 };
 
-export default Login;
+export default withRouter(Login);

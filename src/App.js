@@ -7,6 +7,7 @@ import {Route} from 'react-router-dom';
 import About from "./containers/about/About";
 import Login from './components/login/login';
 import Post from './components/post/post';
+import {withRouter} from 'react-router-dom';
 import 'typeface-roboto';
 
 import './App.scss';
@@ -18,7 +19,7 @@ class App extends PureComponent {
 			name: 'admin',
 			pass: 'admin'
 		},
-		loggedIn: false,
+		isLogged: true,
 		posts: [
 			{
 				id: 1,
@@ -81,8 +82,9 @@ class App extends PureComponent {
 		if (adminName === name && adminPass === pass) {
 			alert('You are admin');
 			this.setState({
-				loggedIn: true
-			})
+				isLogged: true
+			});
+			this.props.history.push('/');
 		} else {
 			alert('Wrong name or password')
 		}
@@ -90,19 +92,24 @@ class App extends PureComponent {
 
 	logOutHandler = () => {
 		this.setState({
-			loggedIn: false
-		})
+			isLogged: false
+		});
+		alert('See you later.');
+		this.props.history.push('/');
 	};
 
 	render() {
+
 		return (
 			<Container>
 				<Header
 					logOutHandler={this.logOutHandler}
+					isLogged={this.state.isLogged}
 				/>
 
 				<Route path="/" exact>
 					<PostList
+						isLogged={this.state.isLogged}
 						posts={this.state.posts}
 					/>
 				</Route>
@@ -129,4 +136,4 @@ class App extends PureComponent {
 	}
 }
 
-export default App;
+export default withRouter(App);

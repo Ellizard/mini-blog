@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {NavLink} from 'react-router-dom';
+import AdminLinks from './adminLinks/adminLinks';
 
 import './header.scss';
 
@@ -36,23 +37,11 @@ const Header = (props) => {
 							</li>
 						</ul>
 					</div>
-
-					<ul className="navigation">
-						<li>
-							<NavLink to="/new-post">Create new post</NavLink>
-						</li>
-						<li>
-							<NavLink to="/login">Login</NavLink>
-						</li>
-						<li>
-							<button
-								onClick={props.logOutHandler}
-							>
-								Log out
-							</button>
-						</li>
-					</ul>
-
+					<AdminLinks
+						isLogged={props.isLogged}
+						className="navigation"
+						logOutHandler={props.logOutHandler}
+					/>
 				</Toolbar>
 			</AppBar>
 		</div>

@@ -11,6 +11,7 @@ const postList = (props) => {
 					return (
 						<Grid key={post.id} item xs={12} sm={6} md={3}>
 							<PostTeaser
+								isLogged={props.isLogged}
 								post={post}
 							/>
 						</Grid>
