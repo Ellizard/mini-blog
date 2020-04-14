@@ -9,16 +9,22 @@ const post = (props) => {
 	});
 
 	const post = filteredPost[0];
-	const allComments = [...post.comments];
-	const comments = allComments.map((comment) => {
-		return (
-			<Comment
-				key={comment}
-				commentCopy={comment}
-			/>
-		);
 
-	});
+	let comments;
+
+	console.log(post);
+	//let allComments = [...post.comments];
+
+
+	// allComments.map((comment) => {
+	// 	return (
+	// 		<Comment
+	// 			key={comment}
+	// 			commentCopy={comment}
+	// 		/>
+	// 	);
+	//
+	// })
 
 	return (
 		<div>
@@ -27,7 +33,7 @@ const post = (props) => {
 			<p>{post.postBody}</p>
 
 			<h4>Comments:</h4>
-			{comments}
+			{/*{comments}*/}
 		</div>
 	);
 };

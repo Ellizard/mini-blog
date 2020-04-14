@@ -90,29 +90,39 @@ class App extends PureComponent {
 	};
 
 	createPostHandler = (title, smallDescription, postBody) => {
-		console.log(title, smallDescription, postBody);
+		//console.log(title, smallDescription, postBody);
 
 		const t = title.length;
 		const d = smallDescription.length;
 		const b = postBody.length;
 
-		console.log(t,d,b);
-
 		if (t === 0 || d === 0 || b === 0) {
 			alert('All fields should be filed');
 		} else {
 			const posts = [...this.state.posts];
+			console.log('old posts', posts);
+
 			const newPost = {
-				title,
-				smallDescription,
-				postBody
+				id: title.replace(/\s+/g, '-').toLowerCase(),
+				title: title,
+				smallDescription: smallDescription,
+				postBody: postBody,
+				comments: [],
 			};
+
+			console.log('new post', newPost);
+
 			posts.push(newPost);
-			this.setState({
-				posts: posts
-			});
+
+			console.log('updated posts', posts);
+
+
 			alert('New post already added');
 			this.props.history.push('/');
+			this.setState({
+				posts: [...posts]
+			});
+			console.log('state', this.state);
 		}
 
 	};
@@ -141,6 +151,8 @@ class App extends PureComponent {
 	};
 
 	render() {
+
+		console.log(this.state.posts, 'render');
 
 		return (
 			<Container>

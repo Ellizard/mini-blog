@@ -38,11 +38,11 @@ const PostForm = (props) => {
 
 			<div className="formItem">
 				<Typography variant="subtitle1">
-					Small description
+					Post body
 				</Typography>
 				<textarea
 					onChange={(e) => setFullDescription(e.target.value)}
-					placeholder="post description"
+					placeholder="Post body"
 					name=""
 					id=""
 					cols="30"
@@ -52,7 +52,7 @@ const PostForm = (props) => {
 			<Button
 				variant="contained"
 				color="primary"
-				onClick={() => props.onCreatePost(title, smallDescription,postBody) }
+				onClick={() => props.onCreatePost(title, smallDescription, postBody)}
 			>
 				Save post
 			</Button>
