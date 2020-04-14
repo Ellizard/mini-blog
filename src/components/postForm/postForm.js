@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {withRouter} from 'react-router-dom';
 import Typography from "@material-ui/core/Typography";
 import {Button} from "@material-ui/core";
 import './postForm.scss';
@@ -6,10 +7,26 @@ import './postForm.scss';
 
 const PostForm = (props) => {
 
+	let defaultTitle = '';
+	let defaultDescription = '';
+	let defaultPostBody = '';
+	let postID = null;
 
-	const [title, setTitle] = useState('');
-	const [smallDescription, setSmallDescription] = useState('');
-	const [postBody, setFullDescription] = useState('');
+	if (props.match.params.id) {
+
+		postID = props.match.params.id;
+		const currentPost = props.posts.filter( (post) => {
+			return post.id === props.match.params.id;
+		});
+
+		defaultTitle = currentPost[0].title;
+		defaultDescription = currentPost[0].smallDescription;
+		defaultPostBody = currentPost[0].postBody;
+	}
+
+	let [title, setTitle] = useState(defaultTitle);
+	let [smallDescription, setSmallDescription] = useState(defaultDescription);
+	let [postBody, setFullDescription] = useState(defaultPostBody);
 
 	return (
 		<div className="postForm">
@@ -20,6 +37,7 @@ const PostForm = (props) => {
 				<input
 					onChange={(e) => setTitle(e.target.value)}
 					type="text"
+					defaultValue={defaultTitle}
 					name="title"
 					placeholder="title"
 				/>
@@ -31,6 +49,7 @@ const PostForm = (props) => {
 				<input
 					onChange={(e) => setSmallDescription(e.target.value)}
 					type="text"
+					defaultValue={defaultDescription}
 					name="title"
 					placeholder="title"
 				/>
@@ -44,6 +63,7 @@ const PostForm = (props) => {
 					onChange={(e) => setFullDescription(e.target.value)}
 					placeholder="Post body"
 					name=""
+					defaultValue={defaultPostBody}
 					id=""
 					cols="30"
 					rows="10"
@@ -52,7 +72,7 @@ const PostForm = (props) => {
 			<Button
 				variant="contained"
 				color="primary"
-				onClick={() => props.onCreatePost(title, smallDescription, postBody)}
+				onClick={() => props.submitAction(title, smallDescription, postBody, postID)}
 			>
 				Save post
 			</Button>
@@ -60,4 +80,4 @@ const PostForm = (props) => {
 	);
 };
 
-export default PostForm;
+export default withRouter(PostForm);

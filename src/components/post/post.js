@@ -12,19 +12,18 @@ const post = (props) => {
 
 	let comments;
 
-	console.log(post);
-	//let allComments = [...post.comments];
+	let allComments = [...post.comments];
 
 
-	// allComments.map((comment) => {
-	// 	return (
-	// 		<Comment
-	// 			key={comment}
-	// 			commentCopy={comment}
-	// 		/>
-	// 	);
-	//
-	// })
+	comments = allComments.map((comment) => {
+		return (
+			<Comment
+				key={comment}
+				commentCopy={comment}
+			/>
+		);
+
+	})
 
 	return (
 		<div>
@@ -38,7 +37,7 @@ const post = (props) => {
 
 
 			<h4>Comments:</h4>
-			{/*{comments}*/}
+			{comments}
 		</div>
 	);
 };

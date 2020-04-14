@@ -16,7 +16,7 @@ const postTeaser = (props) => {
 				{props.post.title}
 			</Typography>
 			<Typography variant="subtitle2" gutterBottom>
-				{props.post.smallDesription}
+				{props.post.smallDescription}
 			</Typography>
 			<Button
 				size="small"
@@ -26,7 +26,12 @@ const postTeaser = (props) => {
 			>
 				Read More
 			</Button>
-			{props.isLogged ? <AdminLinks index={props.post.id} onDelete={props.onDelete}/> : null}
+			{props.isLogged ?
+				<AdminLinks
+					index={props.post.id}
+					onDelete={props.onDelete}
+					onEdit={props.onEdit}
+				/> : null}
 		</div>
 	);
 };
