@@ -28,9 +28,14 @@ const post = (props) => {
 
 	return (
 		<div>
-			<h1>{post.title}</h1>
-			<h3>{post.smallDesription}</h3>
-			<p>{post.postBody}</p>
+			{post && (
+				<div>
+					<h1>{post.title}</h1>
+					<h3>{post.smallDesription}</h3>
+					<p>{post.postBody}</p>
+				</div>
+			)}
+
 
 			<h4>Comments:</h4>
 			{/*{comments}*/}
