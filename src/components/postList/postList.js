@@ -11,6 +11,7 @@ const postList = (props) => {
 					return (
 						<Grid key={post.id} item xs={12} sm={6} md={3}>
 							<PostTeaser
+								onDelete={props.onDelete}
 								isLogged={props.isLogged}
 								post={post}
 							/>

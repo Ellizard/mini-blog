@@ -1,10 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import Typography from "@material-ui/core/Typography";
 import {Button} from "@material-ui/core";
 import './postForm.scss';
 
 
-const postForm = () => {
+const PostForm = (props) => {
+
+
+	const [title, setTitle] = useState('');
+	const [smallDescription, setSmallDescription] = useState('');
+	const [postBody, setFullDescription] = useState('');
+
 	return (
 		<div className="postForm">
 			<div className="formItem">
@@ -12,6 +18,7 @@ const postForm = () => {
 					Title
 				</Typography>
 				<input
+					onChange={(e) => setTitle(e.target.value)}
 					type="text"
 					name="title"
 					placeholder="title"
@@ -22,6 +29,7 @@ const postForm = () => {
 					Small description
 				</Typography>
 				<input
+					onChange={(e) => setSmallDescription(e.target.value)}
 					type="text"
 					name="title"
 					placeholder="title"
@@ -33,6 +41,7 @@ const postForm = () => {
 					Small description
 				</Typography>
 				<textarea
+					onChange={(e) => setFullDescription(e.target.value)}
 					placeholder="post description"
 					name=""
 					id=""
@@ -40,11 +49,15 @@ const postForm = () => {
 					rows="10"
 				/>
 			</div>
-			<Button variant="contained" color="primary">
+			<Button
+				variant="contained"
+				color="primary"
+				onClick={() => props.onCreatePost(title, smallDescription,postBody) }
+			>
 				Save post
 			</Button>
 		</div>
 	);
 };
 
-export default postForm;
+export default PostForm;

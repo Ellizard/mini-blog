@@ -7,7 +7,10 @@ import classes from './adminLinks.module.scss';
 const adminLinks = (props) => {
 	return (
 		<div className={classes.adminAction}>
-			<IconButton aria-label="delete">
+			<IconButton
+				aria-label="delete"
+				onClick={() => props.onDelete(props.index)}
+			>
 				<DeleteIcon color="secondary" fontSize="small" />
 			</IconButton>
 			<IconButton aria-label="edit">

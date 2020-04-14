@@ -3,10 +3,13 @@ import {withRouter} from 'react-router-dom';
 import Comment from './comment/comment';
 
 const post = (props) => {
+	const ID = +props.match.params.id;
+	const filteredPost = props.posts.filter(function (ele) {
+		return ele.id === ID;
+	});
 
-	const post = {...props.posts[props.match.params.id - 1]};
+	const post = filteredPost[0];
 	const allComments = [...post.comments];
-
 	const comments = allComments.map((comment) => {
 		return (
 			<Comment
