@@ -3,10 +3,19 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter} from "react-router-dom";
+import rootReducer from './redux/reducers';
+import {Provider} from 'react-redux';
+
+import { createStore } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
+const store = createStore(rootReducer, composeWithDevTools());
 
 const app = (
   <BrowserRouter>
-      <App />
+	  <Provider store={store}>
+		  <App />
+	  </Provider>
   </BrowserRouter>
 );
 

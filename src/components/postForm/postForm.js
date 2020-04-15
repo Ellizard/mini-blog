@@ -7,26 +7,33 @@ import './postForm.scss';
 
 const PostForm = (props) => {
 
+	let postData = {};
 	let defaultTitle = '';
 	let defaultDescription = '';
 	let defaultPostBody = '';
-	let postID = null;
 
-	if (props.match.params.id) {
+	const editPage = props.match.params.id;
 
-		postID = props.match.params.id;
-		const currentPost = props.posts.filter( (post) => {
-			return post.id === props.match.params.id;
+	if (editPage) {
+
+		const currentPost = props.posts.find( post => {
+			return post.id === editPage
 		});
 
-		defaultTitle = currentPost[0].title;
-		defaultDescription = currentPost[0].smallDescription;
-		defaultPostBody = currentPost[0].postBody;
+		defaultTitle = currentPost.title;
+		defaultDescription = currentPost.smallDescription;
+		defaultPostBody = currentPost.postBody;
 	}
 
 	let [title, setTitle] = useState(defaultTitle);
 	let [smallDescription, setSmallDescription] = useState(defaultDescription);
 	let [postBody, setFullDescription] = useState(defaultPostBody);
+
+	postData = {
+		title,
+		smallDescription,
+		postBody
+	};
 
 	return (
 		<div className="postForm">
@@ -35,9 +42,9 @@ const PostForm = (props) => {
 					Title
 				</Typography>
 				<input
+					defaultValue={defaultTitle}
 					onChange={(e) => setTitle(e.target.value)}
 					type="text"
-					defaultValue={defaultTitle}
 					name="title"
 					placeholder="title"
 				/>
@@ -47,9 +54,9 @@ const PostForm = (props) => {
 					Small description
 				</Typography>
 				<input
+					defaultValue={smallDescription}
 					onChange={(e) => setSmallDescription(e.target.value)}
 					type="text"
-					defaultValue={defaultDescription}
 					name="title"
 					placeholder="title"
 				/>
@@ -60,10 +67,10 @@ const PostForm = (props) => {
 					Post body
 				</Typography>
 				<textarea
+					defaultValue={postBody}
 					onChange={(e) => setFullDescription(e.target.value)}
 					placeholder="Post body"
 					name=""
-					defaultValue={defaultPostBody}
 					id=""
 					cols="30"
 					rows="10"
@@ -72,7 +79,7 @@ const PostForm = (props) => {
 			<Button
 				variant="contained"
 				color="primary"
-				onClick={() => props.submitAction(title, smallDescription, postBody, postID)}
+				onClick={() => props.submitAction(postData, editPage)}
 			>
 				Save post
 			</Button>

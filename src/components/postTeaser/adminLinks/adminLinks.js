@@ -10,13 +10,13 @@ const AdminLinks = (props) => {
 		<div className={classes.adminAction}>
 			<IconButton
 				aria-label="delete"
-				onClick={() => props.onDelete(props.index)}
+				onClick={() => props.onDelete(props.id)}
 			>
 				<DeleteIcon color="secondary" fontSize="small" />
 			</IconButton>
 			<IconButton
 				aria-label="edit"
-				onClick={() => props.history.push('/edit/' + props.index)}
+				onClick={() => props.history.push('/edit/' + props.id)}
 			>
 				<EditIcon color="primary" fontSize="small" />
 			</IconButton>

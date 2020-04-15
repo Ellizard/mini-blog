@@ -26,12 +26,10 @@ const postTeaser = (props) => {
 			>
 				Read More
 			</Button>
-			{props.isLogged ?
-				<AdminLinks
-					index={props.post.id}
-					onDelete={props.onDelete}
-					onEdit={props.onEdit}
-				/> : null}
+			<AdminLinks
+				id={props.post.id}
+				onDelete={props.onDelete}
+			/>
 		</div>
 	);
 };

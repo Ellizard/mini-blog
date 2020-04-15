@@ -3,7 +3,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import {NavLink} from 'react-router-dom';
-import AdminLinks from './adminLinks/adminLinks';
 
 import './header.scss';
 
@@ -32,16 +31,15 @@ const Header = (props) => {
 							<li>
 								<NavLink to="/">Posts</NavLink>
 							</li>
+						</ul>
+					</div>
+					<div>
+						<ul className="navigation">
 							<li>
-								<NavLink to="/about">About</NavLink>
+								<NavLink to="/new-post">Create new post</NavLink>
 							</li>
 						</ul>
 					</div>
-					<AdminLinks
-						isLogged={props.isLogged}
-						className="navigation"
-						logOutHandler={props.logOutHandler}
-					/>
 				</Toolbar>
 			</AppBar>
 		</div>

@@ -9,11 +9,8 @@ const post = (props) => {
 	});
 
 	const post = filteredPost[0];
-
 	let comments;
-
 	let allComments = [...post.comments];
-
 
 	comments = allComments.map((comment) => {
 		return (
@@ -22,8 +19,7 @@ const post = (props) => {
 				commentCopy={comment}
 			/>
 		);
-
-	})
+	});
 
 	return (
 		<div>
@@ -34,8 +30,6 @@ const post = (props) => {
 					<p>{post.postBody}</p>
 				</div>
 			)}
-
-
 			<h4>Comments:</h4>
 			{comments}
 		</div>
