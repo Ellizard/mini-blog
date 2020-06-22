@@ -6,10 +6,18 @@ import {BrowserRouter} from "react-router-dom";
 import rootReducer from './redux/reducers';
 import {Provider} from 'react-redux';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { devToolsEnhancer } from 'redux-devtools-extension';
+import reduxThunk from 'redux-thunk';
 
-const store = createStore(rootReducer, composeWithDevTools());
+
+//const store = createStore(rootReducer, applyMiddleware(reduxThunk));
+
+const store = createStore(rootReducer, composeWithDevTools(
+	applyMiddleware(reduxThunk),
+	// other store enhancers if any
+));
 
 const app = (
   <BrowserRouter>

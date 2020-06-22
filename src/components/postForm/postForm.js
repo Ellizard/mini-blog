@@ -21,18 +21,15 @@ const PostForm = (props) => {
 		});
 
 		defaultTitle = currentPost.title;
-		defaultDescription = currentPost.smallDescription;
-		defaultPostBody = currentPost.postBody;
+		defaultPostBody = currentPost.body;
 	}
 
 	let [title, setTitle] = useState(defaultTitle);
-	let [smallDescription, setSmallDescription] = useState(defaultDescription);
-	let [postBody, setFullDescription] = useState(defaultPostBody);
+	let [body, setFullDescription] = useState(defaultPostBody);
 
 	postData = {
 		title,
-		smallDescription,
-		postBody
+		body
 	};
 
 	return (
@@ -49,25 +46,13 @@ const PostForm = (props) => {
 					placeholder="title"
 				/>
 			</div>
-			<div className="formItem">
-				<Typography variant="subtitle1">
-					Small description
-				</Typography>
-				<input
-					defaultValue={smallDescription}
-					onChange={(e) => setSmallDescription(e.target.value)}
-					type="text"
-					name="title"
-					placeholder="title"
-				/>
-			</div>
 
 			<div className="formItem">
 				<Typography variant="subtitle1">
 					Post body
 				</Typography>
 				<textarea
-					defaultValue={postBody}
+					defaultValue={body}
 					onChange={(e) => setFullDescription(e.target.value)}
 					placeholder="Post body"
 					name=""

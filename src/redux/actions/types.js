@@ -1,3 +1,11 @@
 export const DELETE_POST = 'DELETE_POST';
 export const ADD_POST = 'ADD_POST';
 export const EDIT_POST = 'EDIT_POST';
+
+export const LOAD_POSTS_START = "LOAD_POSTS_START";
+export const LOAD_POSTS_SUCCESS = "LOAD_POSTS_SUCCESS";
+export const LOAD_POSTS_ERROR = "LOAD_POSTS_ERROR";
+
+export const ADD_NEW_POST_START = "ADD_NEW_POST_START";
+export const ADD_NEW_POST_SUCCESS = "ADD_NEW_POST_SUCCESS";
+export const ADD_NEW_POST_ERROR = "ADD_NEW_POST_ERROR";
