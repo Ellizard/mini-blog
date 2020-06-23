@@ -1,13 +1,86 @@
 import {
-    DELETE_POST,
-    ADD_POST,
-    EDIT_POST,
     LOAD_POSTS_START,
     LOAD_POSTS_SUCCESS,
     LOAD_POSTS_ERROR,
-    ADD_NEW_POST_START, ADD_NEW_POST_SUCCESS, ADD_NEW_POST_ERROR
+    ADD_NEW_POST_START,
+    ADD_NEW_POST_SUCCESS,
+    ADD_NEW_POST_ERROR,
+    DELETE_POST_ERROR,
+    DELETE_POST_SUCCESS,
+    DELETE_POST_START, EDIT_POST_START, EDIT_POST_ERROR, EDIT_POST_SUCCESS
 } from "./types";
 import axios from 'axios';
+
+
+export function editPost(postData, id) {
+    return async dispatch => {
+        dispatch(editPostStart());
+        axios.put('https://simple-blog-api.crew.red/posts/' + id, {
+            title: postData.title,
+            body: postData.body
+        })
+            .then(function (response) {
+                dispatch(editPostSuccess(postData, id));
+                alert('post was edited');
+            })
+            .catch(function (error) {
+                dispatch(editPostError())
+            });
+    }
+}
+
+export function editPostStart() {
+    return {
+        type: EDIT_POST_START
+    }
+}
+
+export function editPostSuccess(postData, id) {
+    return {
+        type: EDIT_POST_SUCCESS,
+        id: id,
+        postData: postData,
+    }
+}
+
+export function editPostError() {
+    return {
+        type: EDIT_POST_ERROR
+    }
+}
+
+export function removePost(id) {
+    return async dispatch => {
+        dispatch(deletePostStart());
+        axios.delete('https://simple-blog-api.crew.red/posts/' + id)
+            .then(function (response) {
+                dispatch(deletePostSuccess(id));
+                alert('Already removed.');
+            })
+            .catch(function (error) {
+                dispatch(deletePostError())
+            });
+    }
+}
+
+export function deletePostStart() {
+    return {
+        type: DELETE_POST_START
+    }
+}
+
+export function deletePostSuccess(id) {
+    return {
+        type: DELETE_POST_SUCCESS,
+        id: id,
+    }
+}
+
+export function deletePostError() {
+    return {
+        type: DELETE_POST_ERROR
+    }
+}
 
 export const addNewPost = (postData) => {
     return async dispatch => {
@@ -18,7 +91,7 @@ export const addNewPost = (postData) => {
         })
             .then(function (response) {
                 dispatch(addNewPostSuccess(response.data));
-                alert('You added a new post');
+                alert('Post was added');
             })
             .catch(function (error) {
                 dispatch(addNewPostError())
@@ -48,7 +121,6 @@ export function addNewPostError() {
 export const loadPosts = () => {
     return async dispatch => {
         dispatch(fetchPostsStart());
-        let posts = [];
 
         axios.get("https://simple-blog-api.crew.red/posts")
             .then(response => {
@@ -58,7 +130,6 @@ export const loadPosts = () => {
                 dispatch(fetchPostsSuccess(result));
             })
             .catch(error => {
-                console.log('error')
                 dispatch(fetchPostsError(error));
             });
     }
@@ -82,24 +153,3 @@ export function fetchPostsError() {
         type: LOAD_POSTS_ERROR
     }
 }
-
-export const deletePost = (id) => {
-    return {
-        type: DELETE_POST,
-        id,
-    }
-};
-
-export const addPost = (postData) => {
-    return {
-        type: ADD_POST,
-        postData,
-    }
-};
-
-export const editPost = (postData, id) => {
-    return {
-        type: EDIT_POST,
-        postData, id
-    }
-};

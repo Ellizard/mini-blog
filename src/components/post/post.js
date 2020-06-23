@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 
 const post = (props) => {
-	console.log(props);
 	const ID = +props.match.params.id;
 
 	const filteredPost = props.posts.filter(function (ele) {

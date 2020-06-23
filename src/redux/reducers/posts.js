@@ -1,11 +1,12 @@
-import {uniqueId} from 'lodash';
 import {
-	DELETE_POST,
-	ADD_POST,
-	EDIT_POST,
 	LOAD_POSTS_START,
 	LOAD_POSTS_SUCCESS,
-	LOAD_POSTS_ERROR, ADD_NEW_POST_START, ADD_NEW_POST_SUCCESS, ADD_NEW_POST_ERROR
+	LOAD_POSTS_ERROR,
+	ADD_NEW_POST_START,
+	ADD_NEW_POST_SUCCESS,
+	ADD_NEW_POST_ERROR,
+	DELETE_POST_START,
+	DELETE_POST_SUCCESS, EDIT_POST_START, EDIT_POST_SUCCESS, EDIT_POST_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -22,7 +23,6 @@ export default function posts(state = initialState, action) {
 				loading: true,
 			}
 		case LOAD_POSTS_SUCCESS:
-
 			return {
 				...state,
 				loading: false,
@@ -35,7 +35,6 @@ export default function posts(state = initialState, action) {
 			}
 
 		case ADD_NEW_POST_START:
-			console.log('add post start');
 			return {
 				...state,
 				loading: true,
@@ -45,7 +44,6 @@ export default function posts(state = initialState, action) {
 			const latestPost = action.postData;
 			const posts = state.posts.slice();
 			posts.push(latestPost);
-
 			return {
 				...state,
 				loading: false,
@@ -58,35 +56,43 @@ export default function posts(state = initialState, action) {
 				loading: false
 			}
 
-		case DELETE_POST:
-			// Compare post ID and delete him.
-			return state.filter( (el) => el.id !== action.id );
-		case ADD_POST:
-			// Get state
-			let updatedState = [...state];
-			// Create object for new data.
-			let postData = {};
-			// Fill all post values.
-			postData = {
-				id: uniqueId('post_'),
-				...action.postData
-			};
-			// Update and return new state.
-			alert('post was added');
-			updatedState.push(postData);
-			return updatedState;
-		case EDIT_POST:
-			// Get current post index.
-			const index = state.findIndex(x => x.id === action.id);
-			// Copy state.
-			const newState = [...state];
-			// Edit current post.
-			newState[index].title = action.postData.title;
-			newState[index].smallDescription = action.postData.smallDescription;
-			newState[index].postBody = action.postData.postBody;
-			// Return updated state
-			alert('Post was updated');
-			return newState;
+		case DELETE_POST_START:
+			return {
+				...state,
+				loading: true,
+			}
+
+		case DELETE_POST_SUCCESS:
+			let postList = [...state.posts];
+			postList = postList.filter( (el) => el.id !== action.id );
+			return {
+				...state,
+				posts: postList,
+				loading: false,
+			}
+
+		case EDIT_POST_START:
+			return {
+				...state,
+				loading: true
+			}
+
+		case EDIT_POST_SUCCESS:
+			const allPosts = [...state.posts];
+			const index = allPosts.findIndex(el => el.id === action.id);
+			allPosts[index].title = action.postData.title;
+			allPosts[index].body = action.postData.body;
+
+			return {
+				...state,
+				loading: false,
+				posts: allPosts,
+			}
+
+		case EDIT_POST_ERROR:
+			return {
+				...state
+			}
 
 		default:
 			return state;

@@ -12,7 +12,7 @@ import 'typeface-roboto';
 
 import './App.scss';
 
-import {deletePost, addPost, editPost, loadPosts, addNewPost} from './redux/actions/posts';
+import {editPost, loadPosts, addNewPost, removePost} from './redux/actions/posts';
 
 class App extends PureComponent {
 
@@ -29,7 +29,8 @@ class App extends PureComponent {
 				<Route path="/" exact>
 					<PostList
 						posts={this.props.posts.posts}
-						onDelete={this.props.onDelete}
+						onDelete={this.props.removePost}
+						odEdit={this.props.editPost}
 					/>
 				</Route>
 
@@ -40,7 +41,7 @@ class App extends PureComponent {
 				<Route path="/edit/:id">
 					<PostForm
 						posts={this.props.posts.posts}
-						submitAction={this.props.onEdit}
+						submitAction={this.props.editPost}
 					/>
 				</Route>
 
@@ -64,10 +65,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		loadPosts: () => dispatch(loadPosts()),
 		addNewPost: (postData) => dispatch(addNewPost(postData)),
-
-		onDelete: (id) => dispatch(deletePost(id)),
-		onAdd: (postData) => dispatch(addPost(postData)),
-		onEdit: (postData, id) => dispatch(editPost(postData, id)),
+		removePost: (id) => dispatch(removePost(id)),
+		editPost: (postData, id) => dispatch(editPost(postData, id)),
 	}
 };
 

@@ -9,23 +9,11 @@ const PostForm = (props) => {
 
 	let postData = {};
 	let defaultTitle = '';
-	let defaultDescription = '';
 	let defaultPostBody = '';
-
-	const editPage = props.match.params.id;
-
-	if (editPage) {
-
-		const currentPost = props.posts.find( post => {
-			return post.id === editPage
-		});
-
-		defaultTitle = currentPost.title;
-		defaultPostBody = currentPost.body;
-	}
-
 	let [title, setTitle] = useState(defaultTitle);
 	let [body, setFullDescription] = useState(defaultPostBody);
+
+	const postId = +props.match.params.id;
 
 	postData = {
 		title,
@@ -64,7 +52,7 @@ const PostForm = (props) => {
 			<Button
 				variant="contained"
 				color="primary"
-				onClick={() => props.submitAction(postData, editPage)}
+				onClick={() => props.submitAction(postData, postId)}
 			>
 				Save post
 			</Button>
