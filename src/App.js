@@ -46,7 +46,9 @@ class App extends PureComponent {
 				</Route>
 
 				<Route path="/post/:id">
-					<Post posts={this.props.posts.posts} />
+					<Post
+						posts={this.props.posts.posts}
+					/>
 				</Route>
 
 			</Container>

@@ -6,7 +6,7 @@ import {
 	ADD_NEW_POST_SUCCESS,
 	ADD_NEW_POST_ERROR,
 	DELETE_POST_START,
-	DELETE_POST_SUCCESS, EDIT_POST_START, EDIT_POST_SUCCESS, EDIT_POST_ERROR
+	DELETE_POST_SUCCESS, EDIT_POST_START, EDIT_POST_SUCCESS, EDIT_POST_ERROR, LOAD_COMMENTS_START, LOAD_COMMENTS_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -92,6 +92,25 @@ export default function posts(state = initialState, action) {
 		case EDIT_POST_ERROR:
 			return {
 				...state
+			}
+
+		case LOAD_COMMENTS_START:
+			return {
+				...state,
+				loading: true,
+			}
+
+		case LOAD_COMMENTS_SUCCESS:
+			return {
+				...state,
+				loading: false,
+				comments: action.comments,
+			}
+
+		case LOAD_POSTS_ERROR:
+			return {
+				...state,
+				loading: false,
 			}
 
 		default:
