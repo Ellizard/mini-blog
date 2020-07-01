@@ -6,7 +6,7 @@ import * as axios from "axios";
 const Post = (props) => {
 	const ID = +props.match.params.id;
 	const [comments, setComments] = useState([]);
-	const [comment, setComment] = useState('');
+	let [comment, setComment] = useState('');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -18,11 +18,9 @@ const Post = (props) => {
 		fetchData();
 	}, []);
 
-	const filteredPost = props.posts.filter(function (ele) {
+	const [filteredPost] = props.posts.filter(function (ele) {
 		return ele.id === ID;
 	});
-
-	const post = filteredPost[0];
 
 	let commentsList;
 
@@ -37,10 +35,10 @@ const Post = (props) => {
 
 	return (
 		<div>
-			{post && (
+			{filteredPost && (
 				<div>
-					<h1>{post.title}</h1>
-					<h3>{post.body}</h3>
+					<h1>{filteredPost.title}</h1>
+					<h3>{filteredPost.body}</h3>
 				</div>
 			)}
 			{commentsList.length ?
@@ -52,14 +50,18 @@ const Post = (props) => {
 			}
 
 			<textarea
+				id="area"
 				cols="30"
 				rows="10"
-				onChange={(e) => setComment(e.target.value)}
-			>
+				onChange={(e) => setComment(e.target.value)} >
 
 			</textarea>
 			<br/>
-			<button onClick={ () => props.addComment(ID, comment) }>
+			<button onClick={ () => {
+				props.addComment(ID, comment);
+				const area = document.getElementById('area');
+				area.value = '';
+			}}>
 				Add comment
 			</button>
 

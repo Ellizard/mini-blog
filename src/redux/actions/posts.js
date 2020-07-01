@@ -13,7 +13,7 @@ import {
     EDIT_POST_SUCCESS,
     LOAD_COMMENTS_ERROR,
     ADD_COMMENT_ERROR,
-    ADD_COMMENT_START
+    ADD_COMMENT_START, ADD_COMMENT_SUCCESS
 } from "./types";
 import axios from 'axios';
 
@@ -199,8 +199,6 @@ export const addComment = (id, comment) => {
     return async dispatch => {
         dispatch(addCommentStart());
 
-        console.log(id, comment);
-
         axios.post("https://simple-blog-api.crew.red/comments", {
             postId: id,
             body: comment
@@ -210,6 +208,7 @@ export const addComment = (id, comment) => {
             })
             .then(result => {
                 dispatch(addCommentSuccess(id, comment));
+                alert('Your comment will be added');
             })
             .catch(error => {
                 dispatch(addCommentError(error));
@@ -225,7 +224,7 @@ export function addCommentStart() {
 
 export function addCommentSuccess(id, comment) {
     return {
-        type: ADD_NEW_POST_SUCCESS,
+        type: ADD_COMMENT_SUCCESS,
         id: id,
         comment: comment,
     }

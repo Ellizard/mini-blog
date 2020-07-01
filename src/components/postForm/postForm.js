@@ -52,7 +52,9 @@ const PostForm = (props) => {
 			<Button
 				variant="contained"
 				color="primary"
-				onClick={() => props.submitAction(postData, postId)}
+				onClick={() => {
+					props.submitAction(postData, postId);
+				}}
 			>
 				Save post
 			</Button>
