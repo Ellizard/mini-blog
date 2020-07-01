@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {withRouter} from 'react-router-dom';
 import Comment from './comment/comment';
-import {connect} from "react-redux";
-import mapStateToProps from "react-redux/lib/connect/mapStateToProps";
 import * as axios from "axios";
 
 const Post = (props) => {
 	const ID = +props.match.params.id;
 	const [comments, setComments] = useState([]);
+	const [comment, setComment] = useState('');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -52,8 +51,17 @@ const Post = (props) => {
 				: <p>Here is no comments for post <b>{ID}</b></p>
 			}
 
-			<textarea cols="30" rows="10"></textarea> <br/>
-			<button>Add comment</button>
+			<textarea
+				cols="30"
+				rows="10"
+				onChange={(e) => setComment(e.target.value)}
+			>
+
+			</textarea>
+			<br/>
+			<button onClick={ () => props.addComment(ID, comment) }>
+				Add comment
+			</button>
 
 		</div>
 	);

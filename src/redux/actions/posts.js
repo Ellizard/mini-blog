@@ -7,7 +7,13 @@ import {
     ADD_NEW_POST_ERROR,
     DELETE_POST_ERROR,
     DELETE_POST_SUCCESS,
-    DELETE_POST_START, EDIT_POST_START, EDIT_POST_ERROR, EDIT_POST_SUCCESS, LOAD_COMMENTS_ERROR
+    DELETE_POST_START,
+    EDIT_POST_START,
+    EDIT_POST_ERROR,
+    EDIT_POST_SUCCESS,
+    LOAD_COMMENTS_ERROR,
+    ADD_COMMENT_ERROR,
+    ADD_COMMENT_START
 } from "./types";
 import axios from 'axios';
 
@@ -185,5 +191,48 @@ export function fetchPostsSuccess(posts) {
 export function fetchPostsError() {
     return {
         type: LOAD_POSTS_ERROR
+    }
+}
+
+
+export const addComment = (id, comment) => {
+    return async dispatch => {
+        dispatch(addCommentStart());
+
+        console.log(id, comment);
+
+        axios.post("https://simple-blog-api.crew.red/comments", {
+            postId: id,
+            body: comment
+        })
+            .then(response => {
+                return response.data;
+            })
+            .then(result => {
+                dispatch(addCommentSuccess(id, comment));
+            })
+            .catch(error => {
+                dispatch(addCommentError(error));
+            });
+    }
+};
+
+export function addCommentStart() {
+    return {
+        type: ADD_COMMENT_START,
+    }
+}
+
+export function addCommentSuccess(id, comment) {
+    return {
+        type: ADD_NEW_POST_SUCCESS,
+        id: id,
+        comment: comment,
+    }
+}
+
+export function addCommentError() {
+    return {
+        type: ADD_COMMENT_ERROR
     }
 }

@@ -12,7 +12,7 @@ import 'typeface-roboto';
 
 import './App.scss';
 
-import {editPost, loadPosts, addNewPost, removePost} from './redux/actions/posts';
+import {editPost, loadPosts, addNewPost, removePost, addComment} from './redux/actions/posts';
 
 class App extends PureComponent {
 
@@ -47,6 +47,7 @@ class App extends PureComponent {
 
 				<Route path="/post/:id">
 					<Post
+						addComment={this.props.addComment}
 						posts={this.props.posts.posts}
 					/>
 				</Route>
@@ -69,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
 		addNewPost: (postData) => dispatch(addNewPost(postData)),
 		removePost: (id) => dispatch(removePost(id)),
 		editPost: (postData, id) => dispatch(editPost(postData, id)),
+		addComment: (id, comment) => dispatch(addComment(id, comment)),
 	}
 };
 
