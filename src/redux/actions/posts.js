@@ -13,10 +13,42 @@ import {
     EDIT_POST_SUCCESS,
     LOAD_COMMENTS_ERROR,
     ADD_COMMENT_ERROR,
-    ADD_COMMENT_START, ADD_COMMENT_SUCCESS
+    ADD_COMMENT_START, ADD_COMMENT_SUCCESS, LOAD_COMMENTS_SUCCESS, LOAD_COMMENTS_START
 } from "./types";
 import axios from 'axios';
 
+
+export function loadComments(id) {
+    return async dispatch => {
+        dispatch(load_comments_start());
+        axios.get(`https://simple-blog-api.crew.red/posts/${id}?_embed=comments`)
+            .then(function (response) {
+                dispatch(load_comments_success(response));
+            })
+            .catch(function (error) {
+                dispatch(load_comments_error())
+            });
+    }
+}
+
+export function load_comments_start() {
+    return {
+        type: LOAD_COMMENTS_START
+    }
+}
+
+export function load_comments_success(id, comments) {
+    return {
+        type: LOAD_COMMENTS_SUCCESS,
+        comments: comments,
+    }
+}
+
+export function load_comments_error() {
+    return {
+        type: LOAD_COMMENTS_ERROR
+    }
+}
 
 export function editPost(postData, id) {
     return async dispatch => {
@@ -35,43 +67,9 @@ export function editPost(postData, id) {
     }
 }
 
-export function loadComments(id) {
-    return async dispatch => {
-        dispatch(load_comments_start());
-        axios.get(`https://simple-blog-api.crew.red/posts/${id}?_embed=comments`)
-            .then(function (response) {
-                console.log(response);
-                dispatch(load_comments_success(response));
-                console.log('loaded');
-            })
-            .catch(function (error) {
-                dispatch(load_comments_error())
-            });
-    }
-}
-
 export function editPostStart() {
     return {
         type: EDIT_POST_START
-    }
-}
-
-export function load_comments_start() {
-    return {
-        type: LOAD_POSTS_START
-    }
-}
-
-export function load_comments_success(id, comments) {
-    return {
-        type: LOAD_POSTS_SUCCESS,
-        comments: comments,
-    }
-}
-
-export function load_comments_error() {
-    return {
-        type: LOAD_COMMENTS_ERROR
     }
 }
 

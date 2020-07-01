@@ -4,6 +4,7 @@ import Comment from './comment/comment';
 import * as axios from "axios";
 
 const Post = (props) => {
+
 	const ID = +props.match.params.id;
 	const [comments, setComments] = useState([]);
 	let [comment, setComment] = useState('');

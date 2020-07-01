@@ -12,7 +12,7 @@ import {
 	EDIT_POST_ERROR,
 	LOAD_COMMENTS_START,
 	LOAD_COMMENTS_SUCCESS,
-	ADD_COMMENT_START, ADD_COMMENT_SUCCESS, ADD_COMMENT_ERROR
+	ADD_COMMENT_START, ADD_COMMENT_SUCCESS, ADD_COMMENT_ERROR, LOAD_COMMENTS_ERROR
 } from '../actions/types';
 
 const initialState = {
@@ -45,7 +45,6 @@ export default function posts(state = initialState, action) {
 				...state,
 				loading: true,
 			}
-
 		case ADD_NEW_POST_SUCCESS:
 			const latestPost = action.postData;
 			const posts = state.posts.slice();
@@ -55,7 +54,6 @@ export default function posts(state = initialState, action) {
 				loading: false,
 				posts: posts
 			}
-
 		case ADD_NEW_POST_ERROR:
 			return {
 				...state,
@@ -67,7 +65,6 @@ export default function posts(state = initialState, action) {
 				...state,
 				loading: true,
 			}
-
 		case DELETE_POST_SUCCESS:
 			let postList = [...state.posts];
 			postList = postList.filter( (el) => el.id !== action.id );
@@ -82,7 +79,6 @@ export default function posts(state = initialState, action) {
 				...state,
 				loading: true
 			}
-
 		case EDIT_POST_SUCCESS:
 			const allPosts = [...state.posts];
 			const index = allPosts.findIndex(el => el.id === action.id);
@@ -94,7 +90,6 @@ export default function posts(state = initialState, action) {
 				loading: false,
 				posts: allPosts,
 			}
-
 		case EDIT_POST_ERROR:
 			return {
 				...state
@@ -102,18 +97,15 @@ export default function posts(state = initialState, action) {
 
 		case LOAD_COMMENTS_START:
 			return {
-				...state,
 				loading: true,
 			}
-
 		case LOAD_COMMENTS_SUCCESS:
 			return {
 				...state,
 				loading: false,
 				comments: action.comments,
 			}
-
-		case LOAD_POSTS_ERROR:
+		case LOAD_COMMENTS_ERROR:
 			return {
 				...state,
 				loading: false,
